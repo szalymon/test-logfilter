@@ -8,11 +8,16 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ConfigurationLoader {
+public class Configuration {
 
     private List<ConfigEntry> configEntries = new ArrayList<>();
 
-    public ConfigurationLoader(String configFilePath) {
+    public static Configuration load(String configFilePath) {
+        final Configuration instance = new Configuration(configFilePath);
+        return instance;
+    }
+
+    private Configuration(String configFilePath) {
         readPatterns(configFilePath);
     }
 
@@ -32,7 +37,6 @@ public class ConfigurationLoader {
                         throw new RuntimeException("Wrong entry in the configuration file");
                     }
                 }
-
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

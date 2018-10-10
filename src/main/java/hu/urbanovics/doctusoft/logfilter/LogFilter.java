@@ -18,7 +18,7 @@ public class LogFilter {
         String destDir = args[1];
         String configurationPath = args[2];
 
-        ConfigurationLoader config = new ConfigurationLoader(configurationPath);
+        Configuration config = Configuration.load(configurationPath);
 
         List<File> files = Arrays.asList(srcDir.listFiles());
 
@@ -35,7 +35,7 @@ public class LogFilter {
         System.out.println(elapsedTime);
     }
 
-    private static void multiThreaded(ConfigurationLoader config, List<File> files, String destDir) {
+    private static void multiThreaded(Configuration config, List<File> files, String destDir) {
         List<LogPatternWriter> logPatternWriters = config.getConfigEntries().stream()
                 .map(it -> new LogPatternWriter(it.name, it.patternValue, Paths.get(destDir, it.name)))
                 .collect(Collectors.toList());
