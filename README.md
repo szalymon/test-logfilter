@@ -11,10 +11,9 @@ Például így:
 
 ```Java
 }).forEach(reader -> {
-    threadPool.submit(new LogProcessor(reader, logPatternWriters));
-    threadPool.submit(new LogProcessor(reader, logPatternWriters));
-    threadPool.submit(new LogProcessor(reader, logPatternWriters));
-    threadPool.submit(new LogProcessor(reader, logPatternWriters));
+    for(int i = 0; i < availableProcessorUnit; i++) {
+        threadPool.submit(new LogProcessor(reader, logPatternWriters));        
+    }
 });
 ```
 
